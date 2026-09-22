@@ -22,6 +22,7 @@ import { Route as ContentNavigationLinkRouteImport } from './routes/content/navi
 import { Route as ContentNavigationUseNavigateRouteImport } from './routes/content/navigation/use-navigate'
 import { Route as ContentNestedRoutingIndexRouteImport } from './routes/content/nested-routing/index'
 import { Route as ContentRoutingIndexRouteImport } from './routes/content/routing/index'
+import { Route as ContentSearchIndexRouteImport } from './routes/content/search/index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -93,6 +94,11 @@ const ContentRoutingIndexRoute = ContentRoutingIndexRouteImport.update({
   path: '/content/routing/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ContentSearchIndexRoute = ContentSearchIndexRouteImport.update({
+  id: '/content/search/',
+  path: '/content/search/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -108,6 +114,7 @@ export interface FileRoutesByFullPath {
   '/content/navigation/': typeof ContentNavigationIndexRoute
   '/content/nested-routing/': typeof ContentNestedRoutingIndexRoute
   '/content/routing/': typeof ContentRoutingIndexRoute
+  '/content/search/': typeof ContentSearchIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -122,6 +129,7 @@ export interface FileRoutesByTo {
   '/content/navigation': typeof ContentNavigationIndexRoute
   '/content/nested-routing': typeof ContentNestedRoutingIndexRoute
   '/content/routing': typeof ContentRoutingIndexRoute
+  '/content/search': typeof ContentSearchIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -138,6 +146,7 @@ export interface FileRoutesById {
   '/content/navigation/': typeof ContentNavigationIndexRoute
   '/content/nested-routing/': typeof ContentNestedRoutingIndexRoute
   '/content/routing/': typeof ContentRoutingIndexRoute
+  '/content/search/': typeof ContentSearchIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -155,6 +164,7 @@ export interface FileRouteTypes {
     | '/content/navigation/'
     | '/content/nested-routing/'
     | '/content/routing/'
+    | '/content/search/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -169,6 +179,7 @@ export interface FileRouteTypes {
     | '/content/navigation'
     | '/content/nested-routing'
     | '/content/routing'
+    | '/content/search'
   id:
     | '__root__'
     | '/'
@@ -184,6 +195,7 @@ export interface FileRouteTypes {
     | '/content/navigation/'
     | '/content/nested-routing/'
     | '/content/routing/'
+    | '/content/search/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -197,6 +209,7 @@ export interface RootRouteChildren {
   ContentLayoutRoutesIndexRoute: typeof ContentLayoutRoutesIndexRoute
   ContentNestedRoutingIndexRoute: typeof ContentNestedRoutingIndexRoute
   ContentRoutingIndexRoute: typeof ContentRoutingIndexRoute
+  ContentSearchIndexRoute: typeof ContentSearchIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -292,6 +305,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContentRoutingIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/content/search/': {
+      id: '/content/search/'
+      path: '/content/search'
+      fullPath: '/content/search/'
+      preLoaderRoute: typeof ContentSearchIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -324,6 +344,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContentLayoutRoutesIndexRoute: ContentLayoutRoutesIndexRoute,
   ContentNestedRoutingIndexRoute: ContentNestedRoutingIndexRoute,
   ContentRoutingIndexRoute: ContentRoutingIndexRoute,
+  ContentSearchIndexRoute: ContentSearchIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

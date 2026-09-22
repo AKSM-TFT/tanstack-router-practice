@@ -1,3 +1,4 @@
+import Codeblock from '#/components/Codeblock';
 import { useQuery } from '@tanstack/react-query';
 import { createFileRoute, Link, useLoaderData } from '@tanstack/react-router'
 
@@ -27,10 +28,18 @@ function RouteComponent() {
             <QueryComponent />
           </div>
         </div>
-        <p>Before navigating to this page, it takes 5 seconds due to a delay I configured. Normally, it would take around 15-20 milliseconds to fetch the data.
-          React Query will stil show the loading text for that short amount of time, which is an example of bad UI design. Loader comes in when we want the data preloaded
-          before the user sees the actual component.
+        <p>Before navigating to this page, it takes 5 seconds due to a delay I configured. Normally, it would take around 150 milliseconds to fetch the data.
+          React Query will stil show the loading text for that short amount of time, which is an example of bad UI design. However, once that data is loaded with React Query, 
+          It'll assumed that the data is stale and store it in the cache, which will be removed 5 minutes after it becomes inactive or when the component unmounts.
         </p>
+        <p>Loader comes in when we want the data preloaded before the user sees the actual component. The drawback for loaders is that when the functions takes a long time to finish, 
+          if it takes around 5 seconds, it may seem like the screen froze since it won't navigate until the data is fully loaded. Use loader when the data you 
+          want to fetch when it is the main part of the page.
+        </p>
+        <h2 className="text-2xl my-4">Loaders with Param</h2>
+        <p className="mb-4">The great thing with loaders is that you can connect it to a dynamic route and the the parameters from the route, and use that to fetch specific data. Say we have 
+          a route <code>/posts/$postId</code>, and we want to load the data before heading to the actual page. We could use dynamic routing with loader to fetch that by using this structure: </p>
+          <Codeblock code="loader: ({ params }) => fetchPostById(params.postId)" />
       </div>
     </div>
   )
